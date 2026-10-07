@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="以《名人传》为案例的多媒体费曼学习应用。" />
+    <title>Jonesの再进化库 · 名人传</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23181718'/%3E%3Cpath d='M17 14h22a8 8 0 0 1 8 8v28H25a8 8 0 0 1-8-8V14Z' fill='%23f4c15d'/%3E%3Cpath d='M25 14v36M31 24h10M31 32h10M31 40h7' stroke='%23181718' stroke-width='3'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="学习导航">
+        <a class="brand" href="#" aria-label="Jonesの再进化库">
+          <span class="brand-mark">J</span>
+          <span><strong>Jones</strong><small>の再进化库</small></span>
+        </a>
+
+        <nav class="side-nav">
+          <button class="nav-item" type="button" data-open-tab="library"><span>▦</span> 我的书库</button>
+          <button class="nav-item active" type="button"><span>▶</span> 继续学习</button>
+          <button class="nav-item" type="button" data-notice="笔记会在本页学习时自动汇总"><span>✎</span> 我的笔记</button>
+          <button class="nav-item" type="button" data-notice="复习卡片将在完成理解检测后生成"><span>◆</span> 待复习</button>
+        </nav>
+
+        <div class="current-book">
+          <p class="eyebrow">正在学习</p>
+          <div class="mini-cover"><span>名<br />人<br />传</span></div>
+          <div>
+            <strong>名人传</strong>
+            <small>罗曼·罗兰</small>
+            <div class="mini-progress"><i id="sideProgress"></i></div>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <span class="sync-dot"></span>
+          <span>本地资料已连接</span>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="breadcrumb"><span>人物传记</span><b>/</b><strong>名人传</strong></div>
+          <div class="top-actions">
+            <button class="icon-button" id="focusBtn" type="button" title="专注模式" aria-label="切换专注模式">◐</button>
+            <button class="primary-button" id="completeBtn" type="button">标记本节已理解</button>
+          </div>
+        </header>
+
+        <section class="book-intro">
+          <div class="book-cover" aria-label="《名人传》封面">
+            <span class="cover-kicker">ROMAIN ROLLAND</span>
+            <strong>名人传</strong>
+            <span class="cover-rule"></span>
+            <small>贝多芬 · 米开朗琪罗 · 托尔斯泰</small>
+          </div>
+          <div class="intro-copy">
+            <p class="eyebrow">人物传记 / 人文思想</p>
+            <h1>名人传</h1>
+            <p class="author">罗曼·罗兰</p>
+            <p class="thesis">伟大的背后是苦难，英雄的本质是战胜苦难的精神力量。</p>
+            <div class="asset-status" aria-label="本书资源">
+              <span><i class="status-video"></i>视频 1</span>
+              <span><i class="status-audio"></i>音频 1</span>
+              <span><i class="status-pdf"></i>PDF 1</span>
+              <span><i class="status-ai"></i>费曼解析</span>
+            </div>
+          </div>
+          <div class="learning-stat">
+            <div class="progress-ring" id="progressRing"><strong>32%</strong><span>学习进度</span></div>
+            <p><b id="masteredCount">3</b> / 9 个知识片段已掌握</p>
+          </div>
+        </section>
+
+        <nav class="content-tabs" aria-label="学习模式">
+          <button type="button" data-tab="overview">全书概览</button>
+          <button class="active" type="button" data-tab="video">视频学习</button>
+          <button type="button" data-tab="audio">音频精读</button>
+          <button type="button" data-tab="pdf">PDF 逐页学</button>
+          <button type="button" data-tab="notes">我的笔记 <span id="noteCount">0</span></button>
+          <button type="button" data-tab="library">AI 拆书</button>
+          <button type="button" data-tab="script">口播输出</button>
+        </nav>
+
+        <div class="tab-panel" id="overviewPanel" data-panel="overview" hidden>
+          <section class="overview-grid">
+            <article class="overview-main">
+              <p class="section-label">核心命题</p>
+              <h2>苦难不是伟大的凭证，<br />把苦难转化为创造才是。</h2>
+              <p>罗曼·罗兰没有为三个“成功者”立传。他写的是三个被命运反复压迫、却仍然持续创造的人。衡量英雄的标准不是赢了多少，而是人在最困难的时候，是否还能守住自己的创造与信念。</p>
+              <blockquote>不要祈求一帆风顺的人生，而要学习如何在必然的苦难中，锻造出自己的精神作品。</blockquote>
+            </article>
+            <div class="three-models">
+              <article><span>01</span><h3>贝多芬</h3><p>身体受限时，仍把个人痛苦写成所有人的欢乐。</p><b>痛苦 → 创造</b></article>
+              <article><span>02</span><h3>米开朗琪罗</h3><p>无法选择任务时，仍能选择作品所达到的标准。</p><b>劳役 → 杰作</b></article>
+              <article><span>03</span><h3>托尔斯泰</h3><p>身份与信念冲突时，把自己的一生变成思想实验。</p><b>矛盾 → 求真</b></article>
+            </div>
+          </section>
+        </div>
+
+        <div class="tab-panel active" id="videoPanel" data-panel="video">
+          <section class="media-learning-layout">
+            <div class="media-column">
+              <div class="video-frame">
+                <video id="videoPlayer" controls preload="metadata">
+                  <source src="assets/名人传.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="media-heading">
+                <div><p class="section-label">视频解析</p><h2>名人传：在地狱中创造永恒</h2></div>
+                <span class="demo-label">案例逐字稿</span>
+              </div>
+              <div class="chapter-line" aria-label="视频章节">
+                <button class="active" type="button" data-video-time="0">苦难的共同结构</button>
+                <button type="button" data-video-time="62">贝多芬</button>
+                <button type="button" data-video-time="128">米开朗琪罗</button>
+                <button type="button" data-video-time="194">托尔斯泰</button>
+              </div>
+            </div>
+
+            <aside class="learning-panel">
+              <div class="panel-tabs">
+                <button class="active" type="button" data-side-tab="transcript">同步逐字稿</button>
+                <button type="button" data-side-tab="feynman">费曼解释</button>
+              </div>
+              <div class="transcript-list" id="videoTranscript"></div>
+              <div class="feynman-card" id="videoFeynman" hidden></div>
+              <div class="panel-actions">
+                <button class="secondary-button" id="explainVideoBtn" type="button">用更简单的话讲</button>
+                <button class="save-note-button" id="saveVideoNote" type="button">＋ 记下这一段</button>
+              </div>
+            </aside>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="audioPanel" data-panel="audio" hidden>
+          <section class="audio-layout">
+            <div class="audio-stage">
+              <div class="audio-art">
+                <span>有声精读</span>
+                <strong>地狱中<br />创造永恒</strong>
+                <small>《名人传》深度讲解</small>
+              </div>
+              <div class="audio-meta"><p class="section-label">音频精读</p><h2>名人传：地狱中创造永恒</h2><p>跟随逐字稿收听，点击任何段落即可跳转。</p></div>
+              <audio id="audioPlayer" controls preload="metadata">
+                <source src="assets/名人传地狱中创造永恒.m4a" type="audio/mp4" />
+              </audio>
+            </div>
+            <aside class="learning-panel audio-transcript-panel">
+              <div class="panel-tabs"><button class="active" type="button">全篇逐字稿</button><span class="demo-label">案例逐字稿</span></div>
+              <div class="transcript-list" id="audioTranscript"></div>
+              <div class="panel-actions"><button class="secondary-button" id="audioSummaryBtn" type="button">查看本段费曼解释</button><button class="save-note-button" id="saveAudioNote" type="button">＋ 记下这一段</button></div>
+            </aside>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="pdfPanel" data-panel="pdf" hidden>
+          <section class="pdf-layout">
+            <div class="pdf-toolbar">
+              <div><p class="section-label">PDF 阅读器</p><h2>名人传：苦难炼金术</h2></div>
+              <div class="pdf-tools"><a href="assets/名人传苦难炼金术.pdf" target="_blank" rel="noopener">打开原始 PDF</a><div class="page-control"><button type="button" id="prevPage" aria-label="上一页">‹</button><label>第 <input id="pageInput" type="number" min="1" max="11" value="1" /> / 11 页</label><button type="button" id="nextPage" aria-label="下一页">›</button></div></div>
+            </div>
+            <div class="pdf-reader"><img id="pdfPage" src="assets/pdf-pages/page-01.jpg" alt="《名人传：苦难炼金术》第 1 页" /></div>
+            <aside class="page-explanation">
+              <div class="explanation-head"><span class="page-badge" id="pageBadge">P. 01</span><div><p class="section-label">本页费曼解释</p><h2 id="pageTitle">苦难不是终点，而是材料</h2></div></div>
+              <div class="explain-block"><h3>像给中学生讲</h3><p id="pageSimple"></p></div>
+              <div class="explain-block analogy"><h3>换个生活类比</h3><p id="pageAnalogy"></p></div>
+              <div class="explain-block"><h3>为什么重要</h3><p id="pageWhy"></p></div>
+              <div class="teachback"><p class="section-label">理解检测</p><h3 id="pageQuestion"></h3><textarea id="teachbackInput" rows="4" placeholder="试着用自己的话讲一遍……"></textarea><button class="primary-button" id="checkAnswer" type="button">完成复述</button></div>
+            </aside>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="notesPanel" data-panel="notes" hidden>
+          <section class="notes-view">
+            <div class="notes-heading"><div><p class="section-label">学习沉淀</p><h2>我的《名人传》笔记</h2></div><button class="secondary-button" id="clearNotes" type="button">清空案例笔记</button></div>
+            <div id="notesList" class="notes-list"><div class="empty-notes"><span>✎</span><h3>还没有笔记</h3><p>在视频、音频或 PDF 学习时，把真正触动你的片段留下来。</p></div></div>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="scriptPanel" data-panel="script" hidden>
+          <section class="script-workspace">
+            <aside class="script-settings">
+              <p class="section-label">口播生成器</p>
+              <h2>把一本书，讲给镜头前的人听</h2>
+              <div class="script-field">
+                <label for="scriptStyle">话术风格</label>
+                <select id="scriptStyle">
+                  <option value="baoliao">爆料体 · 默认</option>
+                  <option value="deep">深度解说</option>
+                  <option value="gentle">温和分享</option>
+                  <option value="short">60 秒精简</option>
+                </select>
+              </div>
+              <div class="style-summary" id="styleSummary">
+                <strong>爆料体</strong>
+                <p>情绪开场、口语推进、连续反问、节奏断裂、金句收尾。</p>
+                <div><span>情绪钩子</span><span>反问链</span><span>语气标注</span></div>
+              </div>
+              <div class="script-outline">
+                <p class="section-label">内容结构</p>
+                <ol id="scriptOutline">
+                  <li>情绪开场</li><li>一句话钩子</li><li>三位人物</li><li>现实迁移</li><li>态度收尾</li>
+                </ol>
+              </div>
+              <button class="secondary-button full-button" id="resetScript" type="button">恢复默认稿</button>
+            </aside>
+
+            <div class="script-editor">
+              <header class="script-editor-head">
+                <div><p class="section-label">当前口播稿</p><h2 id="scriptTitle">《名人传》：这三个人，现实里都输了</h2></div>
+                <div class="script-stats"><span><b id="scriptChars">0</b> 字</span><span>约 <b id="scriptDuration">0</b> 分钟</span></div>
+              </header>
+              <textarea id="scriptContent" aria-label="口播稿内容" spellcheck="false"></textarea>
+              <footer class="script-actions">
+                <p id="scriptSaveState">本地草稿 · 已保存</p>
+                <div><button class="secondary-button" id="copyScript" type="button">复制口播稿</button><button class="primary-button" id="downloadScript" type="button">导出 TXT</button></div>
+              </footer>
+            </div>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="libraryPanel" data-panel="library" hidden>
+          <section class="library-view">
+            <div class="library-heading">
+              <div><p class="section-label">AI 拆书</p><h2>输入书名，生成一份可沉淀的拆书资产</h2></div>
+              <span class="demo-label">由 Gemini 生成</span>
+            </div>
+            <form class="library-parse-form" id="parseForm">
+              <input id="parseTitle" type="text" placeholder="例如：原子习惯、穷查理宝典、思考，快与慢……" autocomplete="off" />
+              <button class="primary-button" id="parseBtn" type="submit">开始拆书</button>
+            </form>
+            <p class="library-status" id="libraryStatus" role="status"></p>
+
+            <details class="library-key-box" id="keyBox">
+              <summary>API Key 设置</summary>
+              <div class="library-key-row">
+                <select id="parseProvider" aria-label="模型渠道">
+                  <option value="gemini">Gemini</option>
+                  <option value="deepseek">DeepSeek</option>
+                </select>
+                <input id="geminiKeyInput" type="password" placeholder="粘贴你的 Gemini API Key（仅保存在本机浏览器，不会上传到任何服务器文件）" autocomplete="off" spellcheck="false" />
+                <button class="secondary-button" id="saveKeyBtn" type="button">保存 Key</button>
+                <button class="secondary-button" id="clearKeyBtn" type="button">清除</button>
+              </div>
+              <p class="library-status" id="keyState"></p>
+            </details>
+
+            <div class="library-results" id="libraryResults"></div>
+
+            <div class="library-saved">
+              <div class="notes-heading"><h3>已入库的书</h3><button class="secondary-button" id="clearLibrary" type="button">清空书库</button></div>
+              <p class="library-folder-note">每拆成一本书，服务器会在应用目录的「书本/<书名>/」里建专属文件夹（含 book.json 与拆书笔记.md）。把视频、音频、PPT、PDF 放进该文件夹，刷新后网站上就能直接打开学习。</p>
+              <div id="libraryList" class="library-list"></div>
+            </div>
+          </section>
+        </div>
+
+        <section id="studyView" hidden>
+          <header class="topbar">
+            <div class="breadcrumb"><span>AI 书库</span><b>/</b><strong id="studyCrumbTitle">—</strong></div>
+            <div class="top-actions">
+              <button class="secondary-button" id="exportStudyMd" type="button">导出 Markdown</button>
+              <button class="primary-button" id="backToLibrary" type="button">← 返回书库</button>
+            </div>
+          </header>
+          <section class="book-intro" id="studyIntro"></section>
+          <nav class="content-tabs" id="studyTabs" aria-label="本书学习模式"></nav>
+          <div id="studyPanels"></div>
+        </section>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
